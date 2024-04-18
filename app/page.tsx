@@ -1,23 +1,16 @@
-import { Provider, utils, types } from "zksync-ethers";
-import { ethers } from "ethers";
-import { toJSON } from "@/helpers";
+import ConnectWallet from "./components/ConnectWallet";
+import SendButton from "./components/SendButton";
+
 
 export default function Home() {
-  const provider = Provider.getDefaultProvider(types.Network.Sepolia);
-  const ethProvider = ethers.getDefaultProvider("sepolia");
-
-  const fetchNetwork = async () => {
-    console.log("Block fetching...");
-    console.log(`Block number: ${await provider.getBlockNumber()}`);
-  }
-  fetchNetwork()
-
-
-
-
 
 
   return (
-    <div className="w-full text-center">Baho</div>
+    <div>
+      <div className="w-full text-center"><ConnectWallet /></div>
+      <h1 className="text-center font-bold text-5xl mt-12" >Send $DTN!</h1>
+      <div className="w-full text-center mt-6"><SendButton /></div>
+    </div>
+
   );
 }
