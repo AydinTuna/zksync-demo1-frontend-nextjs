@@ -1,25 +1,27 @@
 "use client"
+import { ethers } from "ethers";
 import { SmartAccount, Provider, types } from "zksync-ethers";
 
-const ADDRESS = process.env.USER_INIT_ADDR || "";
-const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const ADDRESS = process.env.NEXT_PUBLIC_USER_INIT_ADDR || "";
+const PRIVATE_KEY = process.env.NEXT_PUBLIC_PRIVATE_KEY;
 
 console.log(PRIVATE_KEY);
 
 const provider = Provider.getDefaultProvider(types.Network.Sepolia);
 const account = new SmartAccount({ address: ADDRESS, secret: PRIVATE_KEY }, provider);
+console.log(account);
+
 
 function SendButton() {
     const sendDtn = async () => {
-        console.log(process.env.DTN_TOKEN_ADDRESS, process.env.USER_ADDR1);
 
         const transferHandle = await account.transfer({
-            token: process.env.DTN_TOKEN_ADDRESS,
-            to: process.env.USER_ADDR1 || "",
-            amount: 1000000,
+            token: process.env.NEXT_PUBLIC_DTN_TOKEN_ADDRESS,
+            to: process.env.NEXT_PUBLIC_USER_ADDR1 || "",
+            amount: ethers.parseEther("10"),
         });
         const tx = await transferHandle.wait();
-        console.log(`Blockhash of DTN: ${tx.blockHash}, was transferred to ${tx.to}`);
+        console.log(`Transaction hash of DTN: ${tx.hash}, was transferred to ${tx.to}`);
     }
 
     return (

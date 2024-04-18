@@ -3,8 +3,8 @@ import { toJSON } from "@/helpers";
 import { useEffect, useState } from "react";
 import { SmartAccount, Provider, types } from "zksync-ethers";
 
-const ADDRESS = "0x8e4a6CaB4012739Daf4E047D04c47afE50C86B19";
-const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const ADDRESS = process.env.NEXT_PUBLIC_USER_INIT_ADDR || "";
+const PRIVATE_KEY = process.env.NEXT_PUBLIC_PRIVATE_KEY;
 
 
 const provider = Provider.getDefaultProvider(types.Network.Sepolia);
