@@ -5,16 +5,12 @@ import { SmartAccount, Provider, types } from "zksync-ethers";
 const ADDRESS = process.env.NEXT_PUBLIC_USER_INIT_ADDR || "";
 const PRIVATE_KEY = process.env.NEXT_PUBLIC_PRIVATE_KEY;
 
-console.log(PRIVATE_KEY);
-
 const provider = Provider.getDefaultProvider(types.Network.Sepolia);
 const account = new SmartAccount({ address: ADDRESS, secret: PRIVATE_KEY }, provider);
-console.log(account);
 
 
 function SendButton() {
     const sendDtn = async () => {
-
         const transferHandle = await account.transfer({
             token: process.env.NEXT_PUBLIC_DTN_TOKEN_ADDRESS,
             to: process.env.NEXT_PUBLIC_USER_ADDR1 || "",
